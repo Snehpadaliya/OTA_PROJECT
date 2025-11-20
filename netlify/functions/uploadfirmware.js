@@ -13,7 +13,7 @@ export const handler = async (event) => {
     if (!version || !firmwareFile || !meta) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ status: "error", message: "Missing data" })
+        body: JSON.stringify({ status: "error", message: "Missing fields" }),
       };
     }
 
@@ -26,17 +26,13 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: "ok", message: "Firmware saved!" })
+      body: JSON.stringify({ status: "ok", message: "Saved" }),
     };
 
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        status: "error",
-        message: error.message,
-        stack: error.stack
-      })
+      body: JSON.stringify({ status: "error", message: error.message, stack: error.stack }),
     };
   }
 };
