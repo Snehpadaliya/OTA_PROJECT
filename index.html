@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Firmware OTA Uploader</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="card">
+    <h1>🔥 Firmware OTA Uploader</h1>
+    <p class="subtitle">Upload your firmware and metadata to the cloud OTA system</p>
+
+    <label for="version">Firmware Version</label>
+    <input type="text" id="version" placeholder="e.g. 1.0.0" />
+
+    <label for="binFile">Upload .bin File</label>
+    <div class="file-input">
+      <input type="file" id="binFile" accept=".bin" />
+    </div>
+
+    <button id="generate">
+      <span id="btnText">🚀 Upload to Database</span>
+      <div id="spinner" class="spinner hidden"></div>
+    </button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
