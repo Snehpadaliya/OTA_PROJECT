@@ -1,19 +1,25 @@
-import { neon } from '@netlify/neon';
+const { neon } = require("@neondatabase/serverless");
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
-      return { statusCode: 405, body: "Method Not Allowed" };
+      return {
+        statusCode: 405,
+        body: "Method Not Allowed"
+      };
     }
 
-    const sql = neon();
+    const sql = neon(process.env.NETLIFY_DATABASE_URL);
 
     const { version, firmwareFile, meta } = JSON.parse(event.body || "{}");
 
     if (!version || !firmwareFile || !meta) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ status: "error", message: "Missing fields" }),
+        body: JSON.stringify({
+          status: "error",
+          message: "Missing fields"
+        })
       };
     }
 
@@ -26,13 +32,17 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ status: "ok", message: "Saved" }),
+      body: JSON.stringify({ status: "ok", message: "Saved to DB" })
     };
 
-  } catch (error) {
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ status: "error", message: error.message, stack: error.stack }),
+      body: JSON.stringify({
+        status: "error",
+        message: err.message,
+        stack: err.stack
+      })
     };
   }
 };

@@ -1,6 +1,6 @@
-export const handler = async () => {
+exports.handler = async () => {
   return {
     statusCode: 200,
-    body: "Hello from Netlify Functions"
+    body: "Hello from Netlify Functions!"
   };
 };
